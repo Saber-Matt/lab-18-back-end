@@ -72,6 +72,21 @@ describe('API Routes', () => {
         userId: user.id
       });
     });
+
+    it('GET from /api/me/favorites', async () => {
+
+      // remove this line, here to not have lint error:
+      const response = await request
+        .get('/api/me/favorites')
+        .set('Authorization', user.token);
+        
+      // console.log(response.body);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual([{
+        ...favorite,
+        userId: user.id
+      }]);
+    });
   });
 });
 
