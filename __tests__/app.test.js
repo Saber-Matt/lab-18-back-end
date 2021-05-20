@@ -34,9 +34,9 @@ describe('API Routes', () => {
 
     // append the token to your requests:
     //  .set('Authorization', user.token);
-    
+
     it('GET from /api/shows', async () => {
-      
+
       // remove this line, here to not have lint error:
       const response = await request
         .get('/api/shows')
@@ -48,6 +48,30 @@ describe('API Routes', () => {
       // expect(response.body).toEqual(?);
     });
 
+    let favorite = {
+      id: expect.any(Number),
+      showId: 139,
+      title: 'Girls',
+      image: 'https://static.tvmaze.com/uploads/images/medium_portrait/31/78286.jpg',
+      rating: 6.6,
+      description: '<p>This Emmy winning series is a comic look at the assorted humiliations and rare triumphs of a group of girls in their 20s.</p>'
+    };
+
+
+    it('POST from /api/favorites', async () => {
+
+      // remove this line, here to not have lint error:
+      const response = await request
+        .post('/api/favorites')
+        .set('Authorization', user.token)
+        .send(favorite);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        ...favorite,
+        userId: user.id
+      });
+    });
   });
 });
 
@@ -72,7 +96,7 @@ describe('Munging Data', () => {
 
   it('munges movie data', async () => {
     const output = formatShows(showData);
-    
+
     expect(output).toEqual(expectedShows);
 
   });
