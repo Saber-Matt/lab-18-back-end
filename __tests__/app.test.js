@@ -79,7 +79,7 @@ describe('API Routes', () => {
       const response = await request
         .get('/api/me/favorites')
         .set('Authorization', user.token);
-        
+
       // console.log(response.body);
       expect(response.status).toBe(200);
       expect(response.body).toEqual([{
@@ -88,15 +88,15 @@ describe('API Routes', () => {
       }]);
       favorite = response.body[0];
     });
-    it('GET from /api/favorites/:id', async () => {
-      console.log('id', favorite);
+    it('DELETE from /api/favorites/:id', async () => {
+
       // remove this line, here to not have lint error:
       const response = await request
-      
+
         .delete(`/api/favorites/${favorite.id}`)
         .set('Authorization', user.token);
-        
-        
+
+
       // console.log(response.body);
       expect(response.status).toBe(200);
       expect(response.body).toEqual(favorite);
