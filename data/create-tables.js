@@ -23,7 +23,7 @@ async function run() {
         title VARCHAR(512) NOT NULL,
         image VARCHAR(1024) NOT NULL,
         rating FLOAT,
-        description VARCHAR(1024) NOT NULL,
+        description TEXT NOT NULL,
         user_id INTEGER NOT NULL REFERENCES users(id)
       );
     `);
